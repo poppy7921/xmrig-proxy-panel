@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>ProxyPanel</title>
+    <title>XMR代理面板</title>
     <meta content="width=1000, initial-scale=0.5, maximum-scale=1, user-scalable=yes" name="viewport">
     <link rel="icon" href="img/favicon.png" type="image/x-icon"/>
     <link href="https://cdn.bootcss.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -39,16 +39,16 @@
         <nav class="navbar-default navbar-static-top navbar-light bg-faded">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="" class="navbar-brand"><b>Proxy</b>Panel</a>
+                    <a href="" class="navbar-brand"><b></b></a>
                 </div>
 
-                <div class="navbar-default pull-right">
-                    <ul class="nav navbar-nav">
-                        <li><span id="best" class="navbar-text"></span></li>
-                        <li><span id="latency" class="navbar-text"></span></li>
-                        <li><span id="avg_time" class="navbar-text"></span></li>
-                    </ul>
-                </div>
+                <!div class="navbar-default pull-right">
+                    <!ul class="nav navbar-nav">
+                        <!li><!span id="best" class="navbar-text"><!/span><!/li>
+                        <!li><!span id="latency" class="navbar-text"><!/span><!/li>
+                        <!li><!span id="avg_time" class="navbar-text"><!/span><!/li>
+                    <!/ul>
+                <!/div>
             </div>
         </nav>
     </header>
@@ -64,8 +64,8 @@
                                     <span class="info-box-icon bg-green"><i
                                             class="ion ion-ios-world-outline"></i></span>
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Online workers</span>
-                                        <span class="info-box-number" id="activeworkers"></span>
+                                        <span class="info-box-text">在线矿工</span>
+                                        <font color=DodgerBlue><span class="info-box-number" id="activeworkers"></span></font>
                                     </div>
                                 </div>
                             </div>
@@ -73,8 +73,8 @@
                                 <div class="info-box">
                                     <span class="info-box-icon bg-red"><i class="ion ion-ios-world"></i></span>
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Offline workers</span>
-                                        <span class="info-box-number" id="notactiveworkers"></span>
+                                        <span class="info-box-text">离线矿工</span>
+                                        <font color=red><span class="info-box-number" id="notactiveworkers"></span></font>
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@
                                 <div class="info-box">
                                     <span class="info-box-icon bg-blue"><i class="ion ion-clock"></i></span>
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Online Times</span>
+                                        <span class="info-box-text">运行时间</span>
                                         <span class="info-box-number" id="times"></span>
                                     </div>
                                 </div>
@@ -93,7 +93,7 @@
                                 <div class="info-box">
                                     <span class="info-box-icon bg-aqua"><i class="ion ion-speedometer"></i></span>
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Hashrate</span>
+                                        <span class="info-box-text">瞬间算力</span>
                                         <span class="info-box-number" id="hashrate"></span>
                                     </div>
                                 </div>
@@ -102,7 +102,7 @@
                                 <div class="info-box">
                                     <span class="info-box-icon bg-green"><i class="ion ion-speedometer"></i></span>
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Hashrate 1h</span>
+                                        <span class="info-box-text">1小时平均算力</span>
                                         <span class="info-box-number" id="hashrate1h"></span>
                                     </div>
                                 </div>
@@ -111,18 +111,27 @@
                                 <div class="info-box">
                                     <span class="info-box-icon bg-maroon"><i class="ion ion-speedometer"></i></span>
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Hashrate 12h</span>
+                                        <span class="info-box-text">12小时平均算力</span>
                                         <span class="info-box-number" id="hashrate12h"></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
+							 <div class="col-md-4">
+                                <div class="info-box">
+                                    <span class="info-box-icon bg-red"><i class="ion ion-speedometer"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">24小时平均算力</span>
+                                        <span class="info-box-number" id="hashrate24h"></span>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-4">
                                 <div class="info-box">
                                     <span class="info-box-icon bg-green"><i class="ion ion-flag"></i></span>
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Shares</span>
+                                        <span class="info-box-text">贡献数量</span>
                                         <span class="info-box-number" id="acceptedshares"></span>
                                     </div>
                                 </div>
@@ -131,37 +140,28 @@
                                 <div class="info-box">
                                     <span class="info-box-icon bg-red"><i class="ion ion-cloud"></i></span>
                                     <div class="info-box-content">
-                                        <span class="info-box-text">Total hashes</span>
+                                        <span class="info-box-text">总哈希数</span>
                                         <span class="info-box-number" id="hashes"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="info-box">
-                                    <span class="info-box-icon bg-blue"><i class="ion ion-waterdrop"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text">Effort</span>
-                                        <span class="info-box-number" id="effort"></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="box box-success">
                             <div class="box-header">
-                                <h3 class="box-title">Online workers</h3>
+                                <h3 class="box-title"><b>在线矿工</b></h3>
                             </div>
                             <div class="box-body">
-                                <table id="workerstable" class="table table-bordered table-hover table-striped"
-                                       style="width: 100%"></table>
+                                <font color=green><table id="workerstable" class="table table-bordered table-hover table-striped"
+                                       style="width: 100%"></table></font>
                             </div>
                         </div>
                         <div class="box box-danger">
                             <div class="box-header">
-                                <h3 class="box-title">Offline workers</h3>
+                                <h3 class="box-title"><b>离线矿工</b></h3>
                             </div>
                             <div class="box-body">
-                                <table id="naworkerstable" class="table table-bordered table-hover table-striped"
-                                       style="width: 100%"></table>
+                                <font color=red><table id="naworkerstable" class="table table-bordered table-hover table-striped"
+                                       style="width: 100%"></table></font>
                             </div>
                         </div>
                     </div>
@@ -170,15 +170,14 @@
         </div>
     </div>
 </div>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="https://cdn.bootcss.com/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.bootcss.com/datatables/1.10.16/js/dataTables.bootstrap.min.js"></script>
-<script src="https://cdn.bootcss.com/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.dataTables.min.js"></script>
+<script src="js/dataTables.bootstrap.min.js"></script>
+<script src="js/jquery.slimscroll.min.js"></script>
 <script src="js/adminlte.min.js"></script>
 <script src="js/config.js"></script>
 <script src="js/script.js"></script>
 </body>
 </html>
-
 
