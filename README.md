@@ -1,6 +1,6 @@
 原始英文版本请访问https://github.com/cyynf/xmrig-proxy-panel
 
-此版本在原始英文版本上做了全面汉化，并且适配了xmrig新版本的远程api调用，调整了显示的选项。
+此版本在原始英文版本上做了全面汉化，并且适配了xmrig5.x版本的远程api调用，调整了显示的选项。
 
 ## 配置 ##
 #### 在js/config.js中: ####
