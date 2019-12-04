@@ -1,8 +1,11 @@
+原始英文版本请访问https://github.com/cyynf/xmrig-proxy-panel下载
+
+此版本在原始英文版本上做了全面汉化，并且适配了xmrig新版本的远程api调用，调整了显示的选项。
+
 ## 配置 ##
 #### 在js/config.js中: ####
-``` javascript
 const proxy_url = 'http://127.0.0.1:2222'; //这里填写你的xmrig-proxy的地址, 放在外网服务器上填外网地址';
-```
+
 <br><br>
 ![Image text](https://github.com/cyynf/proxypanel/blob/master/img/image1.png)
 ![Image text](https://github.com/cyynf/proxypanel/blob/master/img/image2.png)
