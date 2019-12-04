@@ -25,14 +25,14 @@ function formatDate(timestamp) {
     }
     var mistiming = (Math.round(new Date()) - timestamp) / 1000;
     if (mistiming < 1) {
-        return '1 seconds ago';
+        return '1 秒 前';
     }
-    var arrr = ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds'];
+    var arrr = ['年', '月', '周', '天', '小时', '分钟', '秒'];
     var arrn = [31536000, 2592000, 604800, 86400, 3600, 60, 1];
     for (var i = 6; i >= 0; i--) {
         var inm = Math.floor(mistiming / arrn[i]);
         if (inm > 0) {
-            result = inm + ' ' + arrr[i] + ' ago';
+            result = inm + ' ' + arrr[i] + ' 前';
         } else {
             return result;
         }
@@ -45,6 +45,7 @@ function mainInfoCallback(data) {
         $('#hashrate').text(data.hashrate.total[0] + ' Kh/s');
         $('#hashrate1h').text(data.hashrate.total[2] + ' Kh/s');
         $('#hashrate12h').text(data.hashrate.total[3] + ' Kh/s');
+		$('#hashrate24h').text(data.hashrate.total[4] + ' Kh/s');
         $('#acceptedshares').text(data.results.accepted + ' / ' + (data.results.accepted + data.results.rejected + data.results.invalid) + ' (' + Number((data.results.accepted / (data.results.accepted + data.results.rejected + data.results.invalid)) * 100).toFixed(2) + '%)');
         $('#hashes').text(data.results.hashes_total.toLocaleString());
         $('#times').text((data.uptime / 3600).toFixed(2) + ' hours');
@@ -68,7 +69,7 @@ function workersInfoCallback(data) {
             } else {
                 name = worker[0];
             }
-            var workdata = [name, worker[6].toLocaleString(), worker[10] + ' Kh/s', worker[11] + ' Kh/s', formatDate(worker[7])];
+            var workdata = [name, worker[1].toLocaleString(), worker[8] + ' Kh/s', worker[9] + ' Kh/s', worker[10] + ' Kh/s', worker[11] + ' Kh/s', worker[12] + ' Kh/s', worker[3].toLocaleString(), formatDate(worker[7])];
             if (parseInt(worker[2]) > 0) {
                 if (parseInt(worker[2]) > 1) {
                     workdata[0] = workdata[0] + " x" + worker[2]
@@ -88,16 +89,16 @@ function workersInfoCallback(data) {
 }
 
 function getProxyMainInfo() {
-    ajaxget(proxy_url, mainInfoCallback);
+    ajaxget(proxy_url+'/1/summary', mainInfoCallback);
     miRefresh = setInterval(function () {
-        ajaxget(proxy_url, mainInfoCallback);
+        ajaxget(proxy_url+'/1/summary', mainInfoCallback);
     }, 60000);
 }
 
 function getProxyWorkersInfo() {
-    ajaxget(proxy_url + '/workers.json', workersInfoCallback);
+    ajaxget(proxy_url + '/1/workers', workersInfoCallback);
     wiRefresh = setInterval(function () {
-        ajaxget(proxy_url + '/workers.json', workersInfoCallback);
+        ajaxget(proxy_url + '/1/workers', workersInfoCallback);
     }, 60000);
 }
 
@@ -120,23 +121,31 @@ $(document).ready(function () {
     datatable = $('#workerstable').DataTable({
         data: workers,
         columns: [
-            {title: "Name", className: 'table-center'},
-            {title: "Hashes", width: '15%', className: 'table-right'},
-            {title: "Hashrate 1h", width: '15%', className: 'table-right'},
-            {title: "Hashrate 12h", width: '15%', className: 'table-right'},
-            {title: "Last Hash", width: '15%', className: 'table-right'}
+            {title: "名称",width: '10%', className: 'table-center'},
+			{title: "最后IP", width: '10%', className: 'table-center'},
+			{title: "1分钟", width: '10%', className: 'table-right'},
+            {title: "10分钟", width: '10%', className: 'table-right'},
+            {title: "1小时", width: '10%', className: 'table-right'},
+            {title: "12小时", width: '10%', className: 'table-right'},
+			{title: "24小时", width: '10%', className: 'table-right'},
+			{title: "贡献数", width: '10%', className: 'table-right'},
+            {title: "提交", width: '10%', className: 'table-right'}
         ],
-        "order": [[3, "desc"]]
+        "order": [[0, "asc"]]
     });
     datatable2 = $('#naworkerstable').DataTable({
         data: naworkers,
         columns: [
-            {title: "Name", className: 'table-center'},
-            {title: "Hashes", width: '15%', className: 'table-right'},
-            {title: "Hashrate 1h", width: '15%', className: 'table-right'},
-            {title: "Hashrate 12h", width: '15%', className: 'table-right'},
-            {title: "Last Hash", width: '15%', className: 'table-right'}
+            {title: "名称",width: '10%', className: 'table-center'},
+			{title: "最后IP", width: '8%', className: 'table-left'},
+			{title: "1分钟", width: '8%', className: 'table-right'},
+            {title: "10分钟", width: '8%', className: 'table-right'},
+            {title: "1小时", width: '8%', className: 'table-right'},
+            {title: "12小时", width: '8%', className: 'table-right'},
+			{title: "24小时", width: '8%', className: 'table-right'},
+			{title: "贡献数", width: '8%', className: 'table-right'},
+            {title: "提交", width: '15%', className: 'table-right'}
         ],
-        "order": [[3, "desc"]]
+        "order": [[0, "asc"]]
     });
 });
